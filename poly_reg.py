@@ -40,11 +40,9 @@ def plot_data():
 
     plt.xlabel("X-Axis",fontsize=18)
     plt.ylabel("Y-Axis",fontsize=18)
-    for x in x_real:
-        plt.plot(x, PolyCoefficients(x, weights))
-        print()
+    plt.plot(x_real, [PolyCoefficients(x, weights) for x in x_real], color='r')
+    plt.plot(x_real, [w1*x + w2 for x in x_real], color='g')
     plt.show()
-    plt.pause(5)
 def plot_error():
     figure, ax = plt.subplots(figsize=(4,5))
     plt.ion()
@@ -55,6 +53,6 @@ def plot_error():
     plt.xlabel("X-Axis",fontsize=18)
     plt.ylabel("Y-Axis",fontsize=18)
     plt.show()
-    plt.pause(54)
     
 plot_data()
+plt.pause(50)

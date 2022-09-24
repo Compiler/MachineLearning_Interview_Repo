@@ -8,5 +8,5 @@ def PolyCoefficients(x, coeffs):
     o = len(coeffs)
     y = 0
     for i in range(o):
-        y += coeffs[i]*x**i
+        y += coeffs[o - i - 1]*x**i
     return y
