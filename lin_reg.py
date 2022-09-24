@@ -31,13 +31,11 @@ figure, ax = plt.subplots(figsize=(4,5))
 
 x_real = [9.63, 5.26, 9.50, 9.35, 9.2, 7.67]
 y_real = [7.525, 4.348, 7.382, 7.305, 6.538, 5.207]
-
 # GUI
 
 plt.ion()
 
 #  Plot
-
 plot1 = ax.scatter(x_real, y_real)
 ax.set_xlim(0, 10)
 ax.set_ylim(0, 10)
@@ -46,6 +44,10 @@ ax.set_ylim(0, 10)
 
 plt.xlabel("X-Axis",fontsize=18)
 plt.ylabel("Y-Axis",fontsize=18)
+
+
+
+
 w1 = 1
 w2 = 1
 best_state = (w1, w2)
@@ -54,6 +56,8 @@ abline(w1, w2)
 figure.canvas.draw()
 figure.canvas.flush_events()
 plt.show()
+best_slope, best_intercept = np.polyfit(x_real, y_real, 1)
+
 for i in range(100000):
     w1 = random.uniform(-5, 5)
     w2 = random.uniform(-5, 5)
@@ -65,7 +69,10 @@ for i in range(100000):
         figure.canvas.draw()
         figure.canvas.flush_events()
         plt.show()
-    
+        sleep(0.1)
+    # if(best_slope == best_state[1] and best_intercept == best_state[0]):
+    #     print("Found solution in", i , "iterations!")
+    #     break;    
 abline(best_state[1], best_state[0])
 figure.canvas.draw()
 figure.canvas.flush_events()
