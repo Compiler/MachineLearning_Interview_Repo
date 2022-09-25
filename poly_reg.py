@@ -23,7 +23,10 @@ y_real = [4.525, 5.348, 5.382, 3.305, 3.538, 5.207]
 w1 = 1
 w2 = 1
 
+lbmda = 0.1
 weights = np.polyfit(x_real, y_real, 3)
+for i in range(1, len(weights)):
+    weights[len(weights) - i] *= lbmda
 print(weights)
 
 print("Error random:\t", error(y_real, w1, w2))

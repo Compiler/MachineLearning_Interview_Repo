@@ -10,3 +10,10 @@ def PolyCoefficients(x, coeffs):
     for i in range(o):
         y += coeffs[o - i - 1]*x**i
     return y
+
+def abline(slope, intercept):
+    """Plot a line from slope and intercept"""
+    axes = plt.gca()
+    x_vals = np.array(axes.get_xlim())
+    y_vals = intercept + slope * x_vals
+    plt.plot(x_vals, y_vals, '--')
