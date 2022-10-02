@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+%matplotlib inline
 
 from sklearn.model_selection import  train_test_split
 import os, pathlib
@@ -12,6 +13,7 @@ data_path = f'{data_base}/california_housing_train.csv'
 
 assert(os.path.exists(data_path))
 df = pd.read_csv(data_path)
+df['median_income_to_house_value'] = df['median_house_value'] / df['median_income']
 df['rooms_per_household'] = df['total_rooms'] / df['households']
 df['bedrooms_per_room'] = df['total_bedrooms'] / df['total_rooms']
 df['population_per_household'] = df['population'] / df['households']
@@ -59,7 +61,7 @@ target = ['median_house_value']
 
 train_X, train_Y = train[features], train[target]
 
-def vif(X, vif_lim = 7.5):
+def vif(X, vif_lim = 10):
     import statsmodels.api as sm
     from statsmodels.stats.outliers_influence import variance_inflation_factor
     
@@ -125,6 +127,7 @@ test_score=[np.sqrt(-scores[1][i].mean()) for i in range(len(param_range))]
 
 
 
+
 fig = plt.figure(figsize=(8,6))
 plt.plot(param_range, train_score, label='Train')
 plt.plot(param_range, test_score, label='Test')
@@ -155,6 +158,7 @@ train_mse = mean_squared_error(train_Y, lr.predict(train_X))
 train_rmse = np.sqrt(train_mse)
 print("Training error:", train_rmse)
 
+print(test_copy.info())
 y_pred = lr.predict(test_X)
 test_mse = mean_squared_error(y_pred, test_Y)
 test_rmse = np.sqrt(test_mse)
