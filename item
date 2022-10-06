@@ -1,0 +1,1 @@
+journalctl --no-pager | grep -wv 'discord' > logs
